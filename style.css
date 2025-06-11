@@ -1,0 +1,424 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Work Sans', sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  background: #1e293b;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.full-portrait img {
+  max-width: 100%;
+  height: auto;
+  
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.animated-border {
+  position: relative;
+  display: inline-block;
+  width: 320px;
+  height: auto;
+  
+  overflow: visible;
+}
+
+/* Main Image */
+.animated-border img {
+  display: block;
+  
+  width: 100%;    /* पूरे कंटेनर (180px) को फ़िट कर ले */
+  height: auto;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Common styles for all border lines */
+.animated-border .line {
+  position: absolute;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+  z-index: 2;
+}
+
+/* Top border (Top-Left) */
+.line.top {
+  top: -5px;
+  left: 0;
+  height: 6px;
+  width: 0;
+  animation: growWidth 2.5s ease-in-out infinite;
+  border-top-left-radius: 20px;
+}
+
+/* Left border (Top-Left) */
+.line.left {
+  top: -5px;
+  left: -5px;
+  width: 6px;
+  height: 0;
+  animation: growHeight 2.5s ease-in-out infinite;
+  animation-delay: 0.4s;
+  border-top-left-radius: 20px;
+}
+
+/* Bottom border (Bottom-Right) */
+.line.bottom {
+  bottom: -5px;
+  right: 0;
+  height: 6px;
+  width: 0;
+  animation: growWidth 2.5s ease-in-out infinite;
+  animation-delay: 1.25s;
+  border-bottom-right-radius: 20px;
+}
+
+/* Right border (Bottom-Right) */
+.line.right {
+  bottom: -5px;
+  right: -5px;
+  width: 6px;
+  height: 0;
+  animation: growHeight 2.5s ease-in-out infinite;
+  animation-delay: 1.65s;
+  border-bottom-right-radius: 20px;
+}
+
+/* Width animation */
+/* Top और Bottom लाइन की चौड़ाई बढ़ेगी 100%, यानी animated-border की width के अनुसार */
+@keyframes growWidth {
+  0%, 100% { width: 0; opacity: 0.1; }
+  50%      { width: 50%; opacity: 1; }
+}
+
+/* Left और Right लाइन की ऊँचाई बढ़ेगी 100%, यानी animated-border की height के अनुसार */
+@keyframes growHeight {
+  0%, 100% { height: 0; opacity: 0.1; }
+  50%      { height: 33%; opacity: 1; }
+}
+
+
+
+
+
+.right-panel {
+  flex: 2;
+  background: url('images/bg.jpg') no-repeat center center;
+  background-size: cover;
+  color: #1e293b;
+  padding: 40px;
+  overflow-y: auto;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 कॉलम, समान चौड़ाई */
+  gap: 15px;                             /* कॉलम और रो के बीच 15px गैप */
+  margin-bottom: 25px;
+}
+
+.tab {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #e2e8f0;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #1e293b;
+
+  /* ← यह लाइन जोड़ें: टैब का फ़ॉन्ट साइज़ अब 18px होगा */
+  font-size: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  transition: all 0.3s ease;
+}
+
+
+
+
+.tab:hover {
+  background-color: #cbd5e1;
+}
+
+.tab.active {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.tab-content {
+  display: block;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+h3 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.typewriter-text {
+  border-right: 2px solid #2563eb;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blink-caret 0.75s step-end infinite;
+  font-size: 28px;
+  color: rgb(224, 242, 254);
+  
+}
+
+/* === Re‐use for each tab’s heading === */
+.typewriter-text-availability,
+.typewriter-text-reviews,
+.typewriter-text-contact,
+.typewriter-text-location {
+  border-right: 2px solid #2563eb;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blink-caret 0.75s step-end infinite;
+  font-size: 28px;
+  color: rgb(224, 242, 254);
+}
+
+@keyframes blink-caret {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #2563eb;
+  }
+}
+
+.highlight-box {
+   background-color: #e0f2fe;
+  border-left: 5px solid #2563eb;
+  padding: 20px;
+  border-radius: 12px;
+  /* ऊपर और नीचे दोनों तरफ़ margin देकर बॉक्स को बाकी से अलग करें */
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.highlight-box h4 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.highlight-box ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.highlight-box li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+p, li {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.con {
+    color: #e0f2fe;
+}
+
+.treatment-section {
+  background-color: #e0f2fe;
+  border-left: 4px solid #2563eb;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.treatment-section h4 {
+  margin-bottom: 12px;
+  font-size: 20px;
+  color: #0f172a;
+}
+
+.treatment-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.treatment-section li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+.treatment-note {
+  background-color: #2563eb;
+  padding: 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* ====== टाइपिंग एनीमेशन की क्लास (Treatments के लिए) ====== */
+.typewriter-text-treatment {
+  border-right: 2px solid #2563eb;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blink-caret 0.75s step-end infinite;
+  font-size: 28px;
+  color: rgb(224, 242, 254);
+}
+
+/* Availability लिस्ट में आइकन और टेक्स्ट के बीच थोड़ा गैप */
+.availability-list li {
+ display: flex;
+  align-items: center;
+  /* अब spacing थोड़ा और बढ़ाया (16px) */
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #0f172a;        /* highlight-box के अंदर डार्क टेक्स्ट */
+}
+
+.availability-list li i {
+  margin-right: 10px;
+  color: #2563eb;           /* आइकन को थोड़ा ब्लू कलर */
+  font-size: 18px;
+}
+
+/* Availability नोट को हल्का इटैलिक लुक */
+.availability-note {
+  margin-top: 15px;
+  font-size: 15px;
+  color: #1e293b;
+  opacity: 0.8;
+}
+
+
+
+/* थोड़ा ध्यान दें कि आपके availability-content ब्लॉक 
+   .right-panel के डार्क टेक्स्ट कलर (#1e293b) से मेल खाता रहे */
+
+
+.review-card {
+  background-color: #e0f2fe;
+  border-left: 5px solid #2563eb;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.review-stars {
+  font-size: 20px;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.review-text {
+  font-style: italic;
+}
+
+.review-author {
+  text-align: right;
+  font-weight: bold;
+  color: #1e3a8a;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, textarea {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #94a3b8;
+  font-size: 16px;
+  background-color: #f8fafc;
+  transition: 0.3s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: #ffffff;
+}
+
+button[type="submit"] {
+  padding: 12px 20px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #1e40af;
+}
+
+.location-button {
+  display: block;            /* make it a block‐level element */
+  width: max-content;        /* shrink to fit its own text */
+  margin: 20px auto 0;       /* center horizontally, add some top spacing */
+  background-color: #2563eb;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.location-button:hover {
+  background-color: #1e40af; /* darker blue on hover */
+}
+
+
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

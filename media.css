@@ -1,0 +1,241 @@
+
+
+/*── मोबाइल-स्पेसिफिक: ≤767px ──*/
+@media (max-width: 767px) {
+
+    .container {
+  display: flex;           /* preserve flex behavior */
+  flex-direction: column;  /* top → bottom, instead of left → right */
+  width: 100%;
+  height: auto;            /* allow height to grow with content */
+  background: transparent;
+}
+
+ /* 2) Ensure portrait comes first, content next */
+  .left-panel  { order: 1; margin-top: 60px; }
+  .right-panel { order: 2; }
+
+
+     .right-panel {
+    display: block !important;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    background: transparent;
+    border-radius: 0;
+  }
+  
+
+   .right-panel .tabs {
+    display: none;
+  }
+
+   .right-panel .tab-content,
+  .right-panel .tab-content.hidden {
+    display: block !important;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    padding: 15px;
+  }
+
+  /* inside the same @media(max-width:767px) */
+.mobile-content .tab-content.hidden {
+  display: block !important;
+}
+
+
+   
+  .mobile-bg {
+    display: block;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('images/mobilebg.png') center/cover no-repeat;
+    z-index: -1;
+    filter: brightness(0.4);
+  }
+
+  .tabs { display: none; }
+
+  .mobile-content section {      /* सारे कंटेंट एक लम्बी लिस्ट में */
+    display: block;
+    padding: 20px;
+    background: rgba(255,255,255,0.9);
+    margin: 10px 0;
+    border-radius: 12px;
+  }
+
+   /* Animated doctor image दिखाना */
+  .left-panel {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;           /* नीचे toggle बटन से जगह */
+  }
+
+    /* 1) सिर्फ portrait कंटेनर की width कम कर रहे हैं */
+  .animated-border {
+    width: 260px;      /* पहले 320px था, अब 220px रख सकते हैं */
+  }
+
+  /* 2) IMG को 100% रखने से यह कंटेनर के अंदर फिट हो जाएगा */
+  .animated-border img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* 2) Toggle बटन दिखाएँ */
+  .mobile-toggle {
+  display: flex;               /* आइकन सेंटर करने के लिए */
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+
+  width: 48px;                 /* चौड़ाई और ऊँचाई बराबर रखें */
+  height: 48px;
+  padding: 0;                  /* padding हटाएँ */
+  background: #2563eb;
+  color: #fff;
+
+  font-size: 20px;
+  border: none;
+  border-radius: 50%;          /* perfect circle */
+
+  cursor: pointer;
+}
+  /* 3) Sidebar (initially ऑफ-स्क्रीन) */
+  .mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: -80%;                         /* a little wider */
+  width: 80%;                         /* up from 75% */
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 41, 59, .95),
+    rgba(15, 23, 42, .95)
+  ) !important;                                  /* subtle two-tone */
+  backdrop-filter: blur(8px);         /* frosted-glass effect */
+  border-top-right-radius: 20px;      /* soft rounding */
+  border-bottom-right-radius: 20px;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.mobile-sidebar-header {
+  display: flex;
+  justify-content: flex-end;   /* push children to the right */
+  padding: 20px;               /* space around the × */
+}
+
+.mobile-sidebar.open {
+  left: 0;
+}
+  /* 4) Sidebar खुला हुआ क्लास */
+  .mobile-sidebar.open {
+    left: 0;
+  }
+  /* 5) Close बटन स्टाइल */
+.mobile-close {
+  width: 40px;
+  height: 40px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  /* you can ditch margin:20px now that the header has padding */
+  margin: 0;
+}
+
+  /* 6) Tabs को वर्टिकल लिस्ट में बदलें */
+.mobile-sidebar .tabs {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.mobile-sidebar .tab {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;    /* left-align icon+text */
+  gap: 12px;                       /* space between icon & label */
+  width: 100%;
+  padding: 15px 20px;
+  background: transparent;
+  color: #e0e7ff;
+  text-align: left !important;
+  border-radius: 0;
+  border: none;
+  transition: background 0.3s;
+}
+
+.mobile-sidebar .tab:hover,
+.mobile-sidebar .tab.active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.highlight-box .availability-list li {
+    display: flex;               /* keep the icon in flow */
+    flex-direction: column;      /* label above, details below */
+    align-items: flex-start;     /* left-align both lines */
+    gap: 4px;                    /* small gap between label & text */
+    padding: 12px 0;             /* vertical padding around each item */
+    border-bottom: 1px solid rgba(0,0,0,0.1); /* optional separator */
+  }
+
+  /* 2) Force the strong (Mon–Fri, Saturday, etc.) onto its own line */
+  .highlight-box .availability-list li strong {
+    display: block;
+    font-size: 16px;             /* bump label size if you like */
+    margin-bottom: 2px;          /* tighten up the gap above details */
+  }
+
+  /* 3) Tweak the normal text (times) to look a bit looser */
+  .highlight-box .availability-list li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1e293b;
+  }
+
+    /* Scroll-to-Top button: bottom-right */
+  .scroll-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;        /* mobile-sidebar के ऊपर */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+
+
+} 
+
+/*── बड़े स्क्रीन (≥768px) पर मोबाइल-साइडबार और टॉगल छुपाएँ ──*/
+@media (min-width: 768px) {
+
+      .mobile-bg,
+  .mobile-toggle,
+  .mobile-sidebar {
+    display: none;
+  }
+
+
+ 
+}
